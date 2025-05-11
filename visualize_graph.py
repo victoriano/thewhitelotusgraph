@@ -28,12 +28,11 @@ def create_graph_visualization():
     # Adjusted height and width for better initial display
     nt = Network(notebook=False, height="900px", width="100%", bgcolor="#F7F6F1", font_color="black")
 
-    # Add nodes with images and labels
-    # Keep track of added nodes to avoid duplicates and to add all unique characters
-    added_nodes = set()
-    node_size = 60  # Increased node size for bigger pictures
-    label_font_size = 20 # Increased label font size
-    edge_font_size = 14 # Font size for edge labels
+    # Populate NetworkX graph first
+    added_nodes_nx = set() # To track nodes added to nx_graph
+    node_size = 60
+    label_font_size = 20
+    edge_font_size = 14
 
     for row in df_merged.iter_rows(named=True):
         source_name = row.get("source_label")
@@ -42,19 +41,50 @@ def create_graph_visualization():
         target_photo = row.get("target_photo_url") or DEFAULT_IMAGE_PLACEHOLDER
         relationship = row.get("relationship") or "related"
 
-        if source_name and source_name not in added_nodes:
-            nt.add_node(source_name, label=source_name, shape="image", image=source_photo, title=source_name, size=node_size, font={'size': label_font_size})
-            added_nodes.add(source_name)
+        if source_name and source_name not in added_nodes_nx:
+            nx_graph.add_node(source_name, label=source_name, shape="image", image=source_photo, title=source_name, size=node_size, font_size=label_font_size)
+            added_nodes_nx.add(source_name)
         
-        if target_name and target_name not in added_nodes:
-            nt.add_node(target_name, label=target_name, shape="image", image=target_photo, title=target_name, size=node_size, font={'size': label_font_size})
-            added_nodes.add(target_name)
+        if target_name and target_name not in added_nodes_nx:
+            nx_graph.add_node(target_name, label=target_name, shape="image", image=target_photo, title=target_name, size=node_size, font_size=label_font_size)
+            added_nodes_nx.add(target_name)
         
         if source_name and target_name:
-            nt.add_edge(source_name, target_name, title=relationship, label=relationship, font={'size': edge_font_size})
+            nx_graph.add_edge(source_name, target_name, title=relationship, label=relationship, font_size=edge_font_size)
 
-    # Add some physics options for a better layout
-    nt.from_nx(nx_graph) # Populate the pyvis network from NetworkX graph
+    # Calculate layout using NetworkX
+    # k controls the optimal distance between nodes. Larger k = more spread.
+    # iterations refine the layout.
+    # seed ensures reproducible layouts.
+    # pos = nx.spring_layout(nx_graph, k=12.0, iterations=550, seed=42) 
+    # scaling_factor = 700 # This variable is now effectively the 'scale' for kamada_kawai
+    pos = nx.kamada_kawai_layout(nx_graph, scale=1000) # Using existing scaling_factor for the scale parameter
+
+    # Add nodes to pyvis network with pre-calculated fixed positions
+    for node_id, (x, y) in pos.items():
+        node_attrs = nx_graph.nodes[node_id]
+        nt.add_node(
+            node_id,
+            x=x, # Coordinates from kamada_kawai_layout are already scaled
+            y=y, # Coordinates from kamada_kawai_layout are already scaled
+            fixed=True,
+            label=node_attrs.get('label', node_id),
+            shape="image", # Ensure shape is set
+            image=node_attrs.get('image', DEFAULT_IMAGE_PLACEHOLDER),
+            title=node_attrs.get('title', node_id),
+            size=node_attrs.get('size', node_size),
+            font={'size': node_attrs.get('font_size', label_font_size)} # Use stored font_size
+        )
+
+    # Add edges to pyvis network
+    for source, target, edge_attrs in nx_graph.edges(data=True):
+        nt.add_edge(
+            source,
+            target,
+            title=edge_attrs.get('title', 'related'),
+            label=edge_attrs.get('label', 'related'),
+            font={'size': edge_attrs.get('font_size', edge_font_size)} # Use stored font_size
+        )
 
     # Add physics toggle buttons to the UI
     # nt.show_buttons(filter_=['physics']) # Temporarily commented out for debugging
@@ -77,16 +107,7 @@ def create_graph_visualization():
         }
       },
       "physics": {
-        "barnesHut": {
-          "gravitationalConstant": -6000,
-          "centralGravity": 0.25,
-          "springLength": 180,
-          "springConstant": 0.05,
-          "damping": 0.3,
-          "avoidOverlap": 0.2
-        },
-        "minVelocity": 0.75,
-        "solver": "barnesHut"
+        "enabled": false
       },
       "interaction": {
         "hover": true,
