@@ -93,46 +93,48 @@ def create_graph_visualization():
         nt.save_graph(HTML_OUTPUT_FILENAME)
         print(f"✅  Graph visualization saved to {HTML_OUTPUT_FILENAME}")
 
-        # Post-process HTML to add a styled title
+        # Post-process HTML to add a styled title and attribution
         with open(HTML_OUTPUT_FILENAME, 'r', encoding='utf-8') as f:
             html_content = f.read()
 
-        title_text = "The White Lotus Character Relationships"
-        # Using Bootstrap's display heading for a nicer look, centered in a container
-        styled_title_html = f'''<div class="container text-center mt-3 mb-3">
-            <h1 class="display-4">{title_text}</h1>
+        title_text = "Unraveling The White Lotus: A Character Web"
+        styled_title_html = f'''<div class="container text-center mt-4 mb-2">
+            <h1 class="display-4" style="font-family: 'Georgia', serif; color: #333;">{title_text}</h1>
         </div>'''
-        
-        # PyVis creates an empty <center><h1></h1></center> when no heading is specified.
-        # We will replace this placeholder.
-        # The exact structure might vary slightly with pyvis versions, being flexible here.
-        placeholder_variants = [
-            "<center>\n<h1></h1>\n</center>",
-            "<center><h1></h1></center>", # If no newlines
-            "<center>\n  <h1></h1>\n</center>" # If indented
-        ]
 
-        replaced = False
-        for placeholder in placeholder_variants:
-            if placeholder in html_content:
-                html_content = html_content.replace(placeholder, styled_title_html, 1)
-                replaced = True
-                break
-        
-        if not replaced:
-            # As a fallback, try to insert after <body> if the specific placeholder isn't found
-            body_tag_end = html_content.find("<body>")
-            if body_tag_end != -1:
-                insert_point = body_tag_end + len("<body>")
-                html_content = html_content[:insert_point] + "\n" + styled_title_html + html_content[insert_point:]
-                print("ℹ️  Used fallback method to insert title.")
-            else:
-                print("⚠️  Could not find a suitable place to insert the title.")
+        attribution_text = 'Vibecoded by <a href="https://linkedin.com/in/victorianoizquierdo" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: none;">Victoriano Izquierdo</a>'
+        attribution_html = f'''<div class="container text-center mb-4">
+            <p style="font-family: 'Arial', sans-serif; font-size: 1rem; color: #555;">{attribution_text}</p>
+        </div>'''
+
+        # Ensure <head> exists, or add it
+        if '<head>' not in html_content:
+            # Fallback: insert a basic head if not present (pyvis usually creates one)
+            html_content = html_content.replace('<html>', '<html><head></head>', 1)
+            
+        # Insert Bootstrap CSS into the <head>
+        bootstrap_css = '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">'
+        head_tag_position = html_content.find('</head>')
+        if head_tag_position != -1:
+            html_content = html_content[:head_tag_position] + bootstrap_css + html_content[head_tag_position:]
+        else:
+            print("⚠️  Could not find </head> tag to insert Bootstrap CSS.")
+
+        # Combine title and attribution
+        header_content = styled_title_html + attribution_html
+
+        # Insert the styled title and attribution after the <body> tag
+        body_tag_position = html_content.find('<body>')
+        if body_tag_position != -1:
+            body_tag_position += len('<body>')
+            html_content = html_content[:body_tag_position] + header_content + html_content[body_tag_position:]
+        else:
+            print("⚠️  Could not find <body> tag to insert title and attribution.")
 
         with open(HTML_OUTPUT_FILENAME, 'w', encoding='utf-8') as f:
             f.write(html_content)
         
-        print(f"ℹ️  Title added to {HTML_OUTPUT_FILENAME}")
+        print(f"ℹ️  Title and attribution added to {HTML_OUTPUT_FILENAME}")
         print(f"ℹ️  You can open this file in your web browser to view the interactive graph.")
     except Exception as e:
         print(f"❌ Error saving graph or adding title: {e}")
