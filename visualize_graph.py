@@ -41,15 +41,21 @@ def create_graph_visualization():
         target_photo = row.get("target_photo_url") or DEFAULT_IMAGE_PLACEHOLDER
         relationship = row.get("relationship") or "related"
 
+        # Add source node only if it's not already added and has a real photo
         if source_name and source_name not in added_nodes_nx:
-            nx_graph.add_node(source_name, label=source_name, shape="image", image=source_photo, title=source_name, size=node_size, font_size=label_font_size)
-            added_nodes_nx.add(source_name)
+            if source_photo != DEFAULT_IMAGE_PLACEHOLDER:
+                nx_graph.add_node(source_name, label=source_name, shape="image", image=source_photo, title=source_name, size=node_size, font_size=label_font_size)
+                added_nodes_nx.add(source_name)
         
+        # Add target node only if it's not already added and has a real photo
         if target_name and target_name not in added_nodes_nx:
-            nx_graph.add_node(target_name, label=target_name, shape="image", image=target_photo, title=target_name, size=node_size, font_size=label_font_size)
-            added_nodes_nx.add(target_name)
+            if target_photo != DEFAULT_IMAGE_PLACEHOLDER:
+                nx_graph.add_node(target_name, label=target_name, shape="image", image=target_photo, title=target_name, size=node_size, font_size=label_font_size)
+                added_nodes_nx.add(target_name)
         
-        if source_name and target_name:
+        # Add edge only if both source and target nodes have been added to the graph (i.e., they have real photos)
+        if source_name and target_name and \
+           source_name in added_nodes_nx and target_name in added_nodes_nx:
             nx_graph.add_edge(source_name, target_name, title=relationship, label=relationship, font_size=edge_font_size)
 
     # Calculate layout using NetworkX
