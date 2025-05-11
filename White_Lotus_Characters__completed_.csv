@@ -1,0 +1,60 @@
+name,id,seasons,wiki_page_url,gender,age_group,status_end,marital_status,luck_end,moral_alignment
+Tanya McQuoid,1,"[""Season 1"", ""Season 2""]",https://thewhitelotus.fandom.com/wiki/Tanya_McQuoid-Hunt,female,50s,deceased,married,bad,good
+Greg Hunt,2,"[""Season 1"", ""Season 2"", ""Season 3""]",https://thewhitelotus.fandom.com/wiki/Greg_Hunt,male,50s,alive,widowed,good,bad
+Belinda,3,"[""Season 1"", ""Season 3""]",https://thewhitelotus.fandom.com/wiki/Belinda_Lindsey,female,40s,alive,single,bad,good
+Armond,4,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Armond,male,40s,deceased,single,bad,neutral
+Shane Patton,5,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Shane_Patton,male,30s,alive,married,good,bad
+Rachel Patton,6,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Rachel_Patton,female,20s,alive,married,bad,good
+Nicole Mossbacher,7,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Nicole_Mossbacher,female,40s,alive,married,good,neutral
+Mark Mossbacher,8,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Mark_Mossbacher,male,40s,alive,married,good,neutral
+Olivia Mossbacher,9,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Olivia_Mossbacher,female,20s,alive,single,good,neutral
+Paula,10,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Paula,female,20s,alive,single,bad,neutral
+Quinn Mossbacher,11,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Quinn_Mossbacher,male,teen,alive,single,good,good
+Kai,12,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Kai,male,20s,alive,single,bad,neutral
+Dillon,13,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Dillon,male,20s,alive,single,good,neutral
+Lani,14,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Lani,female,20s,alive,single,good,good
+Portia,15,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Portia,female,20s,alive,single,bad,neutral
+Albie Di Grasso,16,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Albie_Di_Grasso,male,20s,alive,single,bad,good
+Dominic Di Grasso,17,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Dominic_Di_Grasso,male,50s,alive,married,bad,neutral
+Bert Di Grasso,18,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Bert_Di_Grasso,male,70s,alive,widowed,neutral,neutral
+Cameron Sullivan,19,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Cameron_Sullivan,male,30s,alive,married,good,bad
+Daphne Sullivan,20,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Daphne_Sullivan,female,30s,alive,married,good,neutral
+Ethan Spiller,21,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Ethan_Spiller,male,30s,alive,married,good,neutral
+Harper Spiller,22,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Harper_Spiller,female,30s,alive,married,bad,neutral
+Lucia,23,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Lucia_Greco,Female,20s,Alive,Single,Good,Neutral
+Mia,24,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Mia,female,20s,alive,single,good,neutral
+Valentina,25,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Valentina,female,40s,alive,single,good,neutral
+Rocco,26,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Rocco,male,30s,alive,engaged,good,neutral
+Isabella,27,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Isabella,female,20s,alive,engaged,good,good
+Jack,28,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Jack,male,20s,alive,single,bad,bad
+Quentin,29,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Quentin,male,50s,deceased,single,bad,bad
+Giuseppe,30,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Giuseppe,male,60s,alive,single,bad,neutral
+Chloe,31,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Chloe,Female,30s,Alive,In relationship,Neutral,Neutral
+Pornchai,32,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Pornchai,Male,40s,Alive,Single,Bad,Good
+Zion Lindsey,33,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Zion_Lindsey,Male,20s,Alive,Single,Good,Neutral
+Piper Ratliff,34,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Piper_Ratliff,Female,20s,Alive,Single,Neutral,Good
+Lochlan Ratliff,35,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Lochlan_Ratliff,Male,Teens,Alive,Single,Good,Good
+Timothy Ratliff,36,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Timothy_Ratliff,Male,50s,Alive,Married,Bad,Bad
+Saxon Ratliff,37,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Saxon_Ratliff,Male,20s,Alive,Single,Bad,Neutral
+Victoria Ratliff,38,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Victoria_Ratliff,Female,50s,Alive,Married,Neutral,Neutral
+Mook,39,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Mook,Female,20s,Alive,Single,Good,Good
+Gaitok,40,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Gaitok,Male,20s,Alive,Single,Good,Good
+Rick Hatchett,41,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Rick_Hatchett,Male,40s,Deceased,In relationship,Bad,Bad
+Sritala Hollinger,42,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Sritala_Hollinger,Female,40s,Alive,Widowed,Neutral,Bad
+Jaclyn Lemon,43,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Jaclyn_Lemon,Female,40s,Alive,Married,Neutral,Neutral
+Jim Hollinger,44,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Jim_Hollinger,Male,70s,Deceased,Married,Bad,Bad
+Col. William Tavington,45,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Col._William_Tavington,Male,40s,Deceased,Single,Bad,Bad
+Frank,46,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Frank,Male,30s,Alive,Single,Neutral,Neutral
+"Thidapon ""Mook"" Sornsin",47,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Thidapon_Mook_Sornsin,Female,20s,Alive,Single,Good,Good
+Valentin,48,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Valentin,Male,30s,Alive,Single,Bad,Bad
+Vlad,49,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Vlad,Male,30s,Alive,Single,Bad,Bad
+Amrita,50,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Amrita,Female,30s,Alive,Single,Neutral,Good
+Kitty Patton,51,"[""Season 1""]",https://thewhitelotus.fandom.com/wiki/Kitty_Patton,female,50s,alive,married,good,neutral
+Fabian,52,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Fabian,Male,40s,Alive,Single,Neutral,Good
+Kate Bohr,53,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Kate_Bohr,Female,40s,Alive,Married,Neutral,Good
+Luang Por Teera,54,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Luang_Por_Teera,Male,60s,Alive,Single,Good,Good
+Pam,55,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Pam,Female,30s,Alive,In relationship,Neutral,Neutral
+Niccoló,56,"[""Season 2""]",https://thewhitelotus.fandom.com/wiki/Niccoló,male,40s,deceased,single,bad,bad
+Chelsea,57,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Chelsea,Female,30s,Deceased,In relationship,Bad,Neutral
+Aleksei,58,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Aleksei,Male,30s,Alive,Single,Bad,Bad
+Laurie Duffy,59,"[""Season 3""]",https://thewhitelotus.fandom.com/wiki/Laurie_Duffy,Female,40s,Alive,Married,Neutral,Good

@@ -13,8 +13,8 @@ from urllib.parse import urljoin
 from tqdm import tqdm
 
 # --- Configuration ---
-CSV_NODES_INPUT = "characters_input_skeleton.csv"
-CSV_EDGES_INPUT = "relationships_input.csv"
+CSV_NODES_INPUT = "White_Lotus_Characters__completed_.csv"
+CSV_EDGES_INPUT = "white_lotus_edges_completed.csv"
 CSV_FINAL_OUTPUT = "output_character_relationships_with_details.csv"
 
 # --- Constants ---
