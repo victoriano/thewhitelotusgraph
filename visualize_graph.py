@@ -54,6 +54,12 @@ def create_graph_visualization():
             nt.add_edge(source_name, target_name, title=relationship, label=relationship, font={'size': edge_font_size})
 
     # Add some physics options for a better layout
+    nt.from_nx(nx_graph) # Populate the pyvis network from NetworkX graph
+
+    # Add physics toggle buttons to the UI
+    # nt.show_buttons(filter_=['physics']) # Temporarily commented out for debugging
+
+    # Set advanced layout and interaction options using a JSON string
     nt.set_options("""
     {
       "nodes": {
@@ -72,12 +78,12 @@ def create_graph_visualization():
       },
       "physics": {
         "barnesHut": {
-          "gravitationalConstant": -40000,
+          "gravitationalConstant": -6000,
           "centralGravity": 0.25,
-          "springLength": 100,
+          "springLength": 180,
           "springConstant": 0.05,
           "damping": 0.3,
-          "avoidOverlap": 0.8
+          "avoidOverlap": 0.2
         },
         "minVelocity": 0.75,
         "solver": "barnesHut"
