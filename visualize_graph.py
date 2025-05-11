@@ -58,7 +58,7 @@ def create_graph_visualization():
     # seed ensures reproducible layouts.
     # pos = nx.spring_layout(nx_graph, k=12.0, iterations=550, seed=42) 
     # scaling_factor = 700 # This variable is now effectively the 'scale' for kamada_kawai
-    pos = nx.kamada_kawai_layout(nx_graph, scale=1000) # Using existing scaling_factor for the scale parameter
+    pos = nx.kamada_kawai_layout(nx_graph, scale=1500) # Using existing scaling_factor for the scale parameter
 
     # Add nodes to pyvis network with pre-calculated fixed positions
     for node_id, (x, y) in pos.items():
