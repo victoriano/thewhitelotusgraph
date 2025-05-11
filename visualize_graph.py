@@ -5,7 +5,7 @@ import os
 
 # --- Configuration ---
 CSV_FINAL_OUTPUT = "output_character_relationships_with_details.csv"
-HTML_OUTPUT_FILENAME = "white_lotus_graph.html"
+HTML_OUTPUT_FILENAME = "index.html" # Changed default output filename
 DEFAULT_IMAGE_PLACEHOLDER = "https://via.placeholder.com/150/CCCCCC/000000?Text=No+Image" # A placeholder if no image is found
 
 def create_graph_visualization():
@@ -26,7 +26,7 @@ def create_graph_visualization():
     
     # Pyvis Network
     # Adjusted height and width for better initial display
-    nt = Network(notebook=False, height="900px", width="100%")
+    nt = Network(notebook=False, height="900px", width="100%", bgcolor="#F7F6F1", font_color="black")
 
     # Add nodes with images and labels
     # Keep track of added nodes to avoid duplicates and to add all unique characters
@@ -97,28 +97,69 @@ def create_graph_visualization():
         with open(HTML_OUTPUT_FILENAME, 'r', encoding='utf-8') as f:
             html_content = f.read()
 
-        title_text = "Unraveling The White Lotus: A Character Web"
-        styled_title_html = f'''<div class="container text-center mt-4 mb-2">
-            <h1 class="display-4" style="font-family: 'Georgia', serif; color: #333;">{title_text}</h1>
+        # Clean potential default pyvis elements from <head>
+        head_start_index = html_content.find('<head>')
+        head_end_index = html_content.find('</head>')
+
+        if head_start_index != -1 and head_end_index != -1:
+            head_content_start = head_start_index + len('<head>')
+            actual_head_content = html_content[head_content_start:head_end_index]
+            
+            # Patterns pyvis might add to <head>
+            pyvis_head_placeholders = [
+                "<center><hr></center>",
+                "<center><hr/></center>",
+                "<center><h1></h1></center>",
+                # Variants with newlines/indentation
+                "<center>\n<hr>\n</center>",
+                "<center>\n<hr/>\n</center>",
+                "<center>\n<h1></h1>\n</center>",
+            ]
+            
+            cleaned_head_content = actual_head_content
+            for placeholder in pyvis_head_placeholders:
+                cleaned_head_content = cleaned_head_content.replace(placeholder, "")
+            
+            if cleaned_head_content != actual_head_content:
+                html_content = html_content[:head_content_start] + cleaned_head_content + html_content[head_end_index:]
+                print("Cleaned default pyvis placeholders from <head>.")
+
+        title_text = "The White Lotus Graph"
+        styled_title_html = f'''<div class="container text-left mt-4 mb-2">
+            <h1 style="font-family: 'Cinzel', serif; color: #333; font-size: 25px;">{title_text}</h1>
         </div>'''
 
-        attribution_text = 'Vibecoded by <a href="https://linkedin.com/in/victorianoizquierdo" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: none;">Victoriano Izquierdo</a>'
-        attribution_html = f'''<div class="container text-center mb-4">
+        attribution_text = 'Vibecoded by <a href="https://linkedin.com/in/victorianoizquierdo" target="_blank" rel="noopener noreferrer" style="color: rgb(7, 81, 207); text-decoration: none;">Victoriano Izquierdo</a> from <a href="https://graphext.com" target="_blank" rel="noopener noreferrer" style="color: rgb(7, 81, 207); text-decoration: none;">Graphext</a>'
+        attribution_html = f'''<div class="container text-left mb-4">
             <p style="font-family: 'Arial', sans-serif; font-size: 1rem; color: #555;">{attribution_text}</p>
         </div>'''
 
-        # Ensure <head> exists, or add it
-        if '<head>' not in html_content:
-            # Fallback: insert a basic head if not present (pyvis usually creates one)
-            html_content = html_content.replace('<html>', '<html><head></head>', 1)
-            
-        # Insert Bootstrap CSS into the <head>
-        bootstrap_css = '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">'
-        head_tag_position = html_content.find('</head>')
-        if head_tag_position != -1:
-            html_content = html_content[:head_tag_position] + bootstrap_css + html_content[head_tag_position:]
+        # Ensure <head> exists, or add it (though cleaning implies it does)
+        # Add Bootstrap CSS and Google Fonts CSS into the <head>
+        # Re-find head_end_index as html_content might have changed during cleaning
+        head_end_index = html_content.find('</head>') 
+        if head_start_index != -1 and head_end_index != -1: # Check again in case head was malformed/removed by error
+            # Ensure <head> tag itself wasn't removed if it was empty and cleaned to nothing
+            if html_content.find('<head>') == -1:
+                 # This case should be rare; if pyvis makes a head, it usually has other essential tags.
+                 # If truly empty and removed, we'd need to reconstruct it or insert before <body>.
+                 # For now, assume <head> tags persist.
+                 pass 
+            bootstrap_css = '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">'
+            google_fonts_css = '<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">'
+            custom_styles_css = '''<style>
+              body {
+                background-color: #F7F6F1; /* Off-white background */
+                margin: 0;
+                padding: 0;
+              }
+              #mynetwork {
+                border: none !important; /* Remove border from graph container */
+              }
+            </style>'''
+            html_content = html_content[:head_end_index] + bootstrap_css + google_fonts_css + custom_styles_css + html_content[head_end_index:]
         else:
-            print("⚠️  Could not find </head> tag to insert Bootstrap CSS.")
+            print("Could not find </head> tag to insert Bootstrap, Google Fonts, and Custom CSS after cleaning.")
 
         # Combine title and attribution
         header_content = styled_title_html + attribution_html
@@ -129,15 +170,15 @@ def create_graph_visualization():
             body_tag_position += len('<body>')
             html_content = html_content[:body_tag_position] + header_content + html_content[body_tag_position:]
         else:
-            print("⚠️  Could not find <body> tag to insert title and attribution.")
+            print("Could not find <body> tag to insert title and attribution.")
 
         with open(HTML_OUTPUT_FILENAME, 'w', encoding='utf-8') as f:
             f.write(html_content)
         
-        print(f"ℹ️  Title and attribution added to {HTML_OUTPUT_FILENAME}")
-        print(f"ℹ️  You can open this file in your web browser to view the interactive graph.")
+        print(f"Title and attribution added to {HTML_OUTPUT_FILENAME}")
+        print(f"You can open this file in your web browser to view the interactive graph.")
     except Exception as e:
-        print(f"❌ Error saving graph or adding title: {e}")
+        print(f"Error saving graph or adding title: {e}")
 
 if __name__ == "__main__":
     create_graph_visualization()
