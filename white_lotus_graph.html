@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<div class="container text-center mt-3 mb-3">
+            <h1 class="display-4">The White Lotus Character Relationships</h1>
+        </div>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 900px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "font": {"size": 20}, "id": "Tanya McQuoid", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/3/30/Tanya-S2_Character_Image.png", "label": "Tanya McQuoid", "shape": "image", "size": 60, "title": "Tanya McQuoid"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Greg Hunt", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/3/30/Greg_Hunt_in_Season_3.jpg", "label": "Greg Hunt", "shape": "image", "size": 60, "title": "Greg Hunt"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Portia", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/f/f9/Portia.jpeg", "label": "Portia", "shape": "image", "size": 60, "title": "Portia"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Belinda", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/2/27/Belinda_Lindsey.png", "label": "Belinda", "shape": "image", "size": 60, "title": "Belinda"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Quentin", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/e/ea/Quentin-S2_Character_Image.png", "label": "Quentin", "shape": "image", "size": 60, "title": "Quentin"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Jack", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/4/46/Jack-S2_Character_Image.png", "label": "Jack", "shape": "image", "size": 60, "title": "Jack"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Armond", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/1/1d/Armond-S1CharacterImage.png", "label": "Armond", "shape": "image", "size": 60, "title": "Armond"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Dillon", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/9/9b/Dillon.png", "label": "Dillon", "shape": "image", "size": 60, "title": "Dillon"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Lani", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/3/33/Lani-S1CharacterImage.png", "label": "Lani", "shape": "image", "size": 60, "title": "Lani"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Kai", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/3/30/Kai-S1CharacterImage.png", "label": "Kai", "shape": "image", "size": 60, "title": "Kai"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Shane Patton", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/6/6e/Image-shane.png", "label": "Shane Patton", "shape": "image", "size": 60, "title": "Shane Patton"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Rachel Patton", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/8/82/Rachel-S1CharacterImage.png", "label": "Rachel Patton", "shape": "image", "size": 60, "title": "Rachel Patton"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Nicole Mossbacher", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/1/10/Nicole-S1CharacterImage.png", "label": "Nicole Mossbacher", "shape": "image", "size": 60, "title": "Nicole Mossbacher"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Mark Mossbacher", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/0/0c/S1_Mark.png", "label": "Mark Mossbacher", "shape": "image", "size": 60, "title": "Mark Mossbacher"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Olivia Mossbacher", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/4/4b/Olivia-S1CharacterImage.png", "label": "Olivia Mossbacher", "shape": "image", "size": 60, "title": "Olivia Mossbacher"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Quinn Mossbacher", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/d/db/Quinn-S1CharacterImage.png", "label": "Quinn Mossbacher", "shape": "image", "size": 60, "title": "Quinn Mossbacher"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Paula", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/7/71/Image-paula.png", "label": "Paula", "shape": "image", "size": 60, "title": "Paula"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Dominic Di Grasso", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/4/42/Dominic-S2_Character_Image.png", "label": "Dominic Di Grasso", "shape": "image", "size": 60, "title": "Dominic Di Grasso"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Albie Di Grasso", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/b/b0/Albie-S2_Character_Image.png", "label": "Albie Di Grasso", "shape": "image", "size": 60, "title": "Albie Di Grasso"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Bert Di Grasso", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/4/41/Bert-S2_Character_Image.png", "label": "Bert Di Grasso", "shape": "image", "size": 60, "title": "Bert Di Grasso"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Lucia", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/f/fd/Lucia-S2_Character_Image.png", "label": "Lucia", "shape": "image", "size": 60, "title": "Lucia"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Mia", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/9/9c/Mia-S2_Character_Image.png", "label": "Mia", "shape": "image", "size": 60, "title": "Mia"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Valentina", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/9/90/Valentina.png", "label": "Valentina", "shape": "image", "size": 60, "title": "Valentina"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Rocco", "image": "https://via.placeholder.com/150/CCCCCC/000000?Text=No+Image", "label": "Rocco", "shape": "image", "size": 60, "title": "Rocco"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Isabella", "image": "https://via.placeholder.com/150/CCCCCC/000000?Text=No+Image", "label": "Isabella", "shape": "image", "size": 60, "title": "Isabella"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Giuseppe", "image": "https://via.placeholder.com/150/CCCCCC/000000?Text=No+Image", "label": "Giuseppe", "shape": "image", "size": 60, "title": "Giuseppe"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Daphne Sullivan", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/0/01/Daphne-S2_Character_Image.png", "label": "Daphne Sullivan", "shape": "image", "size": 60, "title": "Daphne Sullivan"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Cameron Sullivan", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/7/7b/Cameron-S2_Character_Image.png", "label": "Cameron Sullivan", "shape": "image", "size": 60, "title": "Cameron Sullivan"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Ethan Spiller", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/4/42/Ethan-S2_Character_Image.png", "label": "Ethan Spiller", "shape": "image", "size": 60, "title": "Ethan Spiller"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Harper Spiller", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/d/d9/Harper-S2_Character_Image.png", "label": "Harper Spiller", "shape": "image", "size": 60, "title": "Harper Spiller"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Chloe", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/f/f5/Chloe.jpg", "label": "Chloe", "shape": "image", "size": 60, "title": "Chloe"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Pornchai", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/2/2f/Pornchai.png", "label": "Pornchai", "shape": "image", "size": 60, "title": "Pornchai"}, {"color": "#97c2fc", "font": {"size": 20}, "id": "Zion Lindsey", "image": "https://static.wikia.nocookie.net/thewhitelotus/images/7/70/Zion_Lindsey.png", "label": "Zion Lindsey", "shape": "image", "size": 60, "title": "Zion Lindsey"}]);
+                  edges = new vis.DataSet([{"font": {"size": 14}, "from": "Tanya McQuoid", "label": "married", "title": "married", "to": "Greg Hunt"}, {"font": {"size": 14}, "from": "Tanya McQuoid", "label": "employer", "title": "employer", "to": "Portia"}, {"font": {"size": 14}, "from": "Tanya McQuoid", "label": "mentor/friend", "title": "mentor/friend", "to": "Belinda"}, {"font": {"size": 14}, "from": "Tanya McQuoid", "label": "target", "title": "target", "to": "Quentin"}, {"font": {"size": 14}, "from": "Tanya McQuoid", "label": "acquaintances", "title": "acquaintances", "to": "Jack"}, {"font": {"size": 14}, "from": "Greg Hunt", "label": "old friends", "title": "old friends", "to": "Quentin"}, {"font": {"size": 14}, "from": "Jack", "label": "accomplices", "title": "accomplices", "to": "Quentin"}, {"font": {"size": 14}, "from": "Armond", "label": "boss", "title": "boss", "to": "Dillon"}, {"font": {"size": 14}, "from": "Armond", "label": "boss", "title": "boss", "to": "Lani"}, {"font": {"size": 14}, "from": "Armond", "label": "boss", "title": "boss", "to": "Kai"}, {"font": {"size": 14}, "from": "Armond", "label": "antagonists", "title": "antagonists", "to": "Shane Patton"}, {"font": {"size": 14}, "from": "Armond", "label": "hotel manager", "title": "hotel manager", "to": "Rachel Patton"}, {"font": {"size": 14}, "from": "Shane Patton", "label": "married", "title": "married", "to": "Rachel Patton"}, {"font": {"size": 14}, "from": "Rachel Patton", "label": "mentor", "title": "mentor", "to": "Nicole Mossbacher"}, {"font": {"size": 14}, "from": "Nicole Mossbacher", "label": "married", "title": "married", "to": "Mark Mossbacher"}, {"font": {"size": 14}, "from": "Nicole Mossbacher", "label": "mother", "title": "mother", "to": "Olivia Mossbacher"}, {"font": {"size": 14}, "from": "Mark Mossbacher", "label": "father", "title": "father", "to": "Olivia Mossbacher"}, {"font": {"size": 14}, "from": "Nicole Mossbacher", "label": "mother", "title": "mother", "to": "Quinn Mossbacher"}, {"font": {"size": 14}, "from": "Mark Mossbacher", "label": "father", "title": "father", "to": "Quinn Mossbacher"}, {"font": {"size": 14}, "from": "Olivia Mossbacher", "label": "best friends", "title": "best friends", "to": "Paula"}, {"font": {"size": 14}, "from": "Olivia Mossbacher", "label": "siblings", "title": "siblings", "to": "Quinn Mossbacher"}, {"font": {"size": 14}, "from": "Paula", "label": "romantic interest", "title": "romantic interest", "to": "Kai"}, {"font": {"size": 14}, "from": "Dominic Di Grasso", "label": "father", "title": "father", "to": "Albie Di Grasso"}, {"font": {"size": 14}, "from": "Bert Di Grasso", "label": "father", "title": "father", "to": "Dominic Di Grasso"}, {"font": {"size": 14}, "from": "Bert Di Grasso", "label": "grandfather", "title": "grandfather", "to": "Albie Di Grasso"}, {"font": {"size": 14}, "from": "Albie Di Grasso", "label": "fling", "title": "fling", "to": "Portia"}, {"font": {"size": 14}, "from": "Dominic Di Grasso", "label": "client", "title": "client", "to": "Lucia"}, {"font": {"size": 14}, "from": "Lucia", "label": "friends", "title": "friends", "to": "Mia"}, {"font": {"size": 14}, "from": "Valentina", "label": "manager", "title": "manager", "to": "Rocco"}, {"font": {"size": 14}, "from": "Valentina", "label": "crush", "title": "crush", "to": "Isabella"}, {"font": {"size": 14}, "from": "Rocco", "label": "coworkers/engaged", "title": "coworkers/engaged", "to": "Isabella"}, {"font": {"size": 14}, "from": "Mia", "label": "affair", "title": "affair", "to": "Giuseppe"}, {"font": {"size": 14}, "from": "Mia", "label": "fling", "title": "fling", "to": "Valentina"}, {"font": {"size": 14}, "from": "Daphne Sullivan", "label": "married", "title": "married", "to": "Cameron Sullivan"}, {"font": {"size": 14}, "from": "Ethan Spiller", "label": "married", "title": "married", "to": "Harper Spiller"}, {"font": {"size": 14}, "from": "Ethan Spiller", "label": "college friends", "title": "college friends", "to": "Cameron Sullivan"}, {"font": {"size": 14}, "from": "Harper Spiller", "label": "friends", "title": "friends", "to": "Daphne Sullivan"}, {"font": {"size": 14}, "from": "Lucia", "label": "romantic interest", "title": "romantic interest", "to": "Albie Di Grasso"}, {"font": {"size": 14}, "from": "Ethan Spiller", "label": "client", "title": "client", "to": "Lucia"}, {"font": {"size": 14}, "from": "Greg Hunt", "label": "dating", "title": "dating", "to": "Chloe"}, {"font": {"size": 14}, "from": "Greg Hunt", "label": "tension", "title": "tension", "to": "Belinda"}, {"font": {"size": 14}, "from": "Belinda", "label": "romantic interest", "title": "romantic interest", "to": "Pornchai"}, {"font": {"size": 14}, "from": "Belinda", "label": "mother", "title": "mother", "to": "Zion Lindsey"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"font": {"size": 18}}, "edges": {"font": {"size": 12, "align": "top"}, "arrows": {"to": {"enabled": false}}}, "physics": {"barnesHut": {"gravitationalConstant": -40000, "centralGravity": 0.25, "springLength": 100, "springConstant": 0.05, "damping": 0.3, "avoidOverlap": 0.8}, "minVelocity": 0.75, "solver": "barnesHut"}, "interaction": {"hover": true, "tooltipDelay": 200}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

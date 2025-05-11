@@ -1,0 +1,44 @@
+source,source_label,target,target_label,relationship
+41,Tanya McQuoid,14,Greg Hunt,married
+41,Tanya McQuoid,32,Portia,employer
+41,Tanya McQuoid,3,Belinda,mentor/friend
+41,Tanya McQuoid,33,Quentin,target
+41,Tanya McQuoid,17,Jack,acquaintances
+14,Greg Hunt,33,Quentin,old friends
+17,Jack,33,Quentin,accomplices
+2,Armond,9,Dillon,boss
+2,Armond,21,Lani,boss
+2,Armond,20,Kai,boss
+2,Armond,39,Shane Patton,antagonists
+2,Armond,35,Rachel Patton,hotel manager
+39,Shane Patton,35,Rachel Patton,married
+35,Rachel Patton,27,Nicole Mossbacher,mentor
+27,Nicole Mossbacher,24,Mark Mossbacher,married
+27,Nicole Mossbacher,28,Olivia Mossbacher,mother
+24,Mark Mossbacher,28,Olivia Mossbacher,father
+27,Nicole Mossbacher,34,Quinn Mossbacher,mother
+24,Mark Mossbacher,34,Quinn Mossbacher,father
+28,Olivia Mossbacher,29,Paula,best friends
+28,Olivia Mossbacher,34,Quinn Mossbacher,siblings
+29,Paula,20,Kai,romantic interest
+10,Dominic Di Grasso,1,Albie Di Grasso,father
+4,Bert Di Grasso,10,Dominic Di Grasso,father
+4,Bert Di Grasso,1,Albie Di Grasso,grandfather
+1,Albie Di Grasso,32,Portia,fling
+10,Dominic Di Grasso,23,Lucia,client
+23,Lucia,25,Mia,friends
+43,Valentina,37,Rocco,manager
+43,Valentina,16,Isabella,crush
+37,Rocco,16,Isabella,coworkers/engaged
+25,Mia,13,Giuseppe,affair
+25,Mia,43,Valentina,fling
+8,Daphne Sullivan,5,Cameron Sullivan,married
+11,Ethan Spiller,15,Harper Spiller,married
+11,Ethan Spiller,5,Cameron Sullivan,college friends
+15,Harper Spiller,8,Daphne Sullivan,friends
+23,Lucia,1,Albie Di Grasso,romantic interest
+11,Ethan Spiller,23,Lucia,client
+14,Greg Hunt,6,Chloe,dating
+14,Greg Hunt,3,Belinda,tension
+3,Belinda,31,Pornchai,romantic interest
+3,Belinda,45,Zion Lindsey,mother

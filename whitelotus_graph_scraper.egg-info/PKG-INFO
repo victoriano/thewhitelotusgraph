@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: whitelotus-graph-scraper
+Version: 0.1.0
+Summary: Script to fetch photos for White Lotus characters from Fandom wiki.
+Requires-Python: >=3.10
+Requires-Dist: requests==2.32.3
+Requires-Dist: pandas==2.2.3
+Requires-Dist: beautifulsoup4==4.13.4
+Requires-Dist: tqdm==4.67.1
+Requires-Dist: numpy==2.2.5
+Requires-Dist: polars>=0.20

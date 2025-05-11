@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "whitelotus-graph-scraper"
+version = "0.1.0"
+description = "Script to fetch photos for White Lotus characters from Fandom wiki."
+requires-python = ">=3.10"
+dependencies = [
+    "requests==2.32.3",
+    "pandas==2.2.3",
+    "beautifulsoup4==4.13.4",
+    "tqdm==4.67.1",
+    "numpy==2.2.5",
+    "polars>=0.20"  # Added polars
+]
+
+[tool.uv.sources]
+# You can specify custom indexes here if needed in the future
+# Example:
+# my-index = { url = "https://my-index.com/simple" }
